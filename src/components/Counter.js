@@ -9,6 +9,9 @@ class Counter extends Component {
   decrement = () => {
     this.props.decrement();
   };
+  incrementIfOdd = () => {
+    this.props.count % 2 === 1 || this.props.count % 2 === -1 ? this.increment() : null;
+  };
   incrementAsync = () => {
     setTimeout(() => this.props.increment(), 1000);
   };
@@ -19,7 +22,7 @@ class Counter extends Component {
         Clicked: {this.props.count} times
         <button onClick={this.increment}>+</button>
         <button onClick={this.decrement}>-</button>
-        <button onClick={this.props.count % 2 === 1 || this.props.count % 2 === -1 ? this.increment : null}>Increment if odd</button>
+        <button onClick={this.incrementIfOdd}>Increment if odd</button>
         <button onClick={this.incrementAsync}>Increment async</button>
       </p>
     );
