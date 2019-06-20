@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { increment, incrementIfOdd, incrementAsync, decrement } from '../actions';
+import { increment, decrement } from '../actions';
 
 class Counter extends Component {
   increment = () => {
@@ -9,27 +9,17 @@ class Counter extends Component {
   decrement = () => {
     this.props.decrement();
   };
-  incrementIfOdd = () => {
-    // Stretch Problem: Implement an increment function that
-    // only increments if the counter value is odd
-    this.props.incrementIfOdd();
-  };
   incrementAsync = () => {
-    // Stretch Problem: Implement an increment function that
-    // increments after waiting for one second
-    this.props.incrementAsync();
+    setTimeout(() => this.props.increment(), 1000);
   };
 
   render() {
-    // Fill in the two button onClick methods
-    // Upon clicking these buttons, the count
-    // should decrement or increment accordingly
     return (
       <p>
         Clicked: {this.props.count} times
         <button onClick={this.increment}>+</button>
         <button onClick={this.decrement}>-</button>
-        <button onClick={this.incrementIfOdd}>Increment if odd</button>
+        <button onClick={this.props.count % 2 === 1 || this.props.count % 2 === -1 ? this.increment : null}>Increment if odd</button>
         <button onClick={this.incrementAsync}>Increment async</button>
       </p>
     );
@@ -55,5 +45,5 @@ const mapStateToProps = (state) => {
 // makes itself known to this component.
 export default connect(
   mapStateToProps,
-  { increment, incrementIfOdd, incrementAsync, decrement },
+  { increment, decrement },
 )(Counter);
